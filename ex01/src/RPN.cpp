@@ -17,7 +17,7 @@ void RPN::insert(int i) {
 void RPN::add() {
 	if (this->stack.size() < 2)
 		throw std::exception();
-	int i,j;
+	float i,j;
 	i = this->stack.top();
 	this->stack.pop();
 	j = this->stack.top();
@@ -28,7 +28,7 @@ void RPN::add() {
 void RPN::sub() {
 	if (this->stack.size() < 2)
 		throw std::exception();
-	int i,j;
+	float i,j;
 	i = this->stack.top();
 	this->stack.pop();
 	j = this->stack.top();
@@ -39,7 +39,7 @@ void RPN::sub() {
 void RPN::div() {
 	if (this->stack.size() < 2)
 		throw std::exception();
-	int i,j;
+	float i,j;
 	i = this->stack.top();
 	if (!i) throw std::exception();
 	this->stack.pop();
@@ -51,7 +51,7 @@ void RPN::div() {
 void RPN::mul() {
 	if (this->stack.size() < 2)
 		throw std::exception();
-	int i,j;
+	float i,j;
 	i = this->stack.top();
 	this->stack.pop();
 	j = this->stack.top();
@@ -59,7 +59,7 @@ void RPN::mul() {
 	this->stack.push(j*i);
 }
 
-int RPN::eval() {
+float RPN::eval() {
 	if (this->stack.size() != 1)
 		throw std::exception();
 	return this->stack.top();

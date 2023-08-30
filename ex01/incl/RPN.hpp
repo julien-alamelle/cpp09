@@ -5,7 +5,7 @@
 
 class RPN {
 private:
-	std::stack<int>		stack;
+	std::stack<float>		stack;
 
 public:
 	RPN();
@@ -18,5 +18,5 @@ public:
 	void sub();
 	void div();
 	void mul();
-	int eval();
+	float eval();
 };
