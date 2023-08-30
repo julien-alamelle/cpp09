@@ -11,8 +11,8 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange &src) {
 }
 
 static int tmtoi(struct tm date) {
-	if (date.tm_year < 2000) return 33;
-	if (date.tm_year > 2063) return (63 << 9) + (12 << 5) + 31;
+	if (date.tm_year < 0) return 1;
+	if (date.tm_year > 500) return (500 << 9) + (11 << 5) + 31;
 	return (date.tm_year << 9) + (date.tm_mon << 5) + date.tm_mday;
 }
 
