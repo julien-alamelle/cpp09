@@ -56,12 +56,16 @@ int main(int ac, char **av) {
 		std::getline(file, line);
 		if(!line.empty()) {
 			char *tmp = strptime(line.c_str(), "%Y-%m-%d | ", &date);
-			if (!tmp || *tmp) {
+			if (!tmp || (date.tm_mon < 7 && date.tm_mon % 2 && date.tm_mday == 31) || (date.tm_mon > 7 && date.tm_mon % 2 == 0 && date.tm_mday == 31) || (date.tm_mon == 1 && date.tm_year % 4 && date.tm_mday > 28) || (date.tm_mon == 1 && date.tm_mday > 29)) {
 				std::cerr << "Error: bad input => " << line << std::endl;
 				continue;
 			}
-			btc = strtof(tmp, 0);
-			if (btc < 0)
+			char *tmp2;
+			btc = strtof(tmp, &tmp2);
+			if (*tmp2) {
+				std::cerr << "Error: bad input => " << line << std::endl;
+			}
+			else if (btc < 0)
 				std::cerr << "Error: not a positive number\n";
 			else if (btc > 1000)
 				std::cerr << "Error: too large a number\n";
