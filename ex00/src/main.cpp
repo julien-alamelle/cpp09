@@ -45,11 +45,18 @@ int main(int ac, char **av) {
 		std::cerr << "Error: could not open file\n";
 		exit(0);
 	}
+	if (file.good()) {
+		std::getline(file, line);
+		if (line != "date | value") {
+			std::cerr << "Error: wrong input format\n";
+			return 0;
+		}
+	}
 	while (file.good()) {
 		std::getline(file, line);
 		if(!line.empty()) {
 			char *tmp = strptime(line.c_str(), "%Y-%m-%d | ", &date);
-			if (!tmp) {
+			if (!tmp || *tmp) {
 				std::cerr << "Error: bad input => " << line << std::endl;
 				continue;
 			}
